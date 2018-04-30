@@ -23,7 +23,7 @@ public class JPAConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		localContainerEntityManagerFactoryBean.setDataSource(dataSource());
-		localContainerEntityManagerFactoryBean.setPackagesToScan("com.bloodbank.entities");
+		localContainerEntityManagerFactoryBean.setPackagesToScan("com.hemoglobin.entities");
 		JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 		localContainerEntityManagerFactoryBean.setJpaVendorAdapter(adapter);
 		localContainerEntityManagerFactoryBean.setJpaProperties(properties());
