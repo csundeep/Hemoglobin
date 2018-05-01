@@ -61,7 +61,12 @@
 	<c:url var="donor_url" value="donors"></c:url>
 	<form:form commandName="donor" id="donor_form" action="${donor_url}"
 					method="post" role="form" style="display: block; clear:both ">
-  <form:hidden path="donorId" />
+				<form:hidden path="donorId" />
+				<form:hidden path="user.userId" />
+	            <form:hidden path="status.statusId" />
+	            <form:hidden path="donorInfo.donorInfoId" />
+	            <form:hidden path="userAddress.addressId" />
+	            <form:hidden path="donorInfo.workAddress.addressId" />
   <div class="form-group">
     <label for="blood_group">Blood Group</label>
     <form:select path="bloodGroup" class="form-control" id="blood_group">
@@ -101,8 +106,8 @@
   
      <div class="form-group">
 	    <label for="occupation">Occupation</label>
-	    <form:input path="donorInfo.occupation" type="text" class="form-control"
-							id="occupation" placeholder="Occupation" />
+	    <form:input path="donorInfo.occupation" type="text"
+							class="form-control" id="occupation" placeholder="Occupation" />
   	</div>
   
   

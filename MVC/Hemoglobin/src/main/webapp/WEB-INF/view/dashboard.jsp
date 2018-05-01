@@ -180,7 +180,7 @@
 	<c:url var="base_url"
 			value="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" />
 	<c:url var="header_image"
-			value='${base_url}/static/images/header_bg.jpg' />
+			value='${base_url}static/images/header_bg.jpg' />
 	
 		
 
@@ -240,7 +240,7 @@
 		 <div class="card-header"
 						style="background-color: #ff1a1a; color: white;">
 			<div style="float: left">		
-	    	${donor.user.firstName} ${donor.user.lastName }
+	    	<a href="${base_url}donors/${donor.donorId}" style="color: white;text-decoration: none;">${donor.user.firstName} ${donor.user.lastName }</a>
 	    	</div>	
 	    	<div style="float: right">		
 	    	${donor.bloodGroup}
@@ -284,11 +284,6 @@
 	
 		 </div>
 	 </div>
-	 
-
-	 
-	
-	 
 	 
 	
 	 </c:forEach>

@@ -66,7 +66,7 @@
 									<div class="form-group">
 									<form:input path="password" type="password" name="password"
 												tabindex="2" class="form-control" placeholder="password"
-												value="admin" />
+												value="1234" />
 									</div>
 		
 									<div class="form-group">

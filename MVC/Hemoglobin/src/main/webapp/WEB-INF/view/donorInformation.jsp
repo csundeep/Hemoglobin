@@ -41,8 +41,9 @@
 				<form:hidden path="donorId" />
 				<form:hidden path="user.userId" />
 	            <form:hidden path="status.statusId" />
+	            <form:hidden path="donorInfo.donorInfoId" />
 	            <form:hidden path="userAddress.addressId" />
-	            <form:hidden path="donorInfo.workAddress.addressId"/>
+	            <form:hidden path="donorInfo.workAddress.addressId" />
 	        <div class="row">
                 
 				<!-- Personal information -->
@@ -178,6 +179,7 @@
 										class="form-control form-control-sm" id="blood_group"
 										name="blood_group">
 										<option value="">--select--</option>
+										<c:forEach var="bloodGroup" items="${bloodGroups}">
 										 <c:choose>
 											<c:when test="${bloodGroup eq donor.bloodGroup}">
 												<option selected value="${bloodGroup}">${bloodGroup}</option>
@@ -186,6 +188,7 @@
 												<option value="${bloodGroup}">${bloodGroup}</option>
 											</c:otherwise>
 										</c:choose>
+										</c:forEach>
 							    	</form:select>
 							    </div>
 			  				</div>
@@ -279,6 +282,15 @@
 			  				</div>
 			  				
 			  				<div class="form-group row">
+							    <label for="id_issue_date"
+									class="col-sm-4 col-form-label form-control-sm">ID Issue Date</label>
+							    <div class="col-sm-6">
+							       <form:input path="donorInfo.idIssueDate" type="text"
+										class="form-control" id="id_issue_date" placeholder="ID issue Date" /><!-- Date picker -->
+							    </div>
+			  				</div>
+			  				
+			  				<div class="form-group row">
 							    <label for="id_expiry_date"
 									class="col-sm-4 col-form-label form-control-sm">ID Expiry Date</label>
 							    <div class="col-sm-6">
@@ -330,8 +342,11 @@
 							    <label for="work_address_state"
 									class="col-sm-4 col-form-label form-control-sm">State</label>
 							    <div class="col-sm-6">
-				    				<form:input path="donorInfo.workAddress.state.stateId" type="text"
-										class="form-control" id="work_address_state" placeholder="State" />
+									    <form:select path="donorInfo.workAddress.state.stateId"
+											class="form-control" id="work_address_state">
+									   			<form:options items="${states}" itemLabel="code"
+												itemValue="stateId" />
+									    </form:select>
 			  					</div>
 							</div>
 							

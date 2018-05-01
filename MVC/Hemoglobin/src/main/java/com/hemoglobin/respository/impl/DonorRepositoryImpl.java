@@ -28,7 +28,6 @@ public class DonorRepositoryImpl implements DonorRepository {
 
 	public Donor create(Donor donor) {
 		entityManager.persist(donor);
-		entityManager.flush();
 		return donor;
 	}
 

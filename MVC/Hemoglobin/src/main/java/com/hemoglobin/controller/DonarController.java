@@ -66,9 +66,11 @@ public class DonarController {
 		Donor donorFromDB = null;
 		try {
 			if (donor.getDonorId() != 0) {
+				System.out.println(donor.toString());
 				donorFromDB = donorService.updateDonor(donor.getDonorId(), donor);
 				modelAndView.addObject("donorRegSuccessMsg", "Your Request has been Updated");
 			} else {
+				System.out.println(donor.toString());
 				User user = (User) session.getAttribute("user");
 				user.getUserrole().setRoleId(2);
 				Status status = new Status(1);
@@ -132,10 +134,18 @@ public class DonarController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("donorInformation");
 		try {
+			System.out.println(donor.toString());
 			donorService.updateDonor(id, donor);
 			modelAndView.addObject("successMessage", "Donor Information has been Updated");
 		} catch (DonorException e) {
 			modelAndView.addObject("failureMessage", "unable to update your Donor information");
+			e.printStackTrace();
+		}
+		modelAndView.addObject("bloodGroups", BloodGroup.values());
+		try {
+			modelAndView.addObject("states", stateService.findAll());
+		} catch (StateException e) {
+			modelAndView.addObject("failureMessage", "Unable to populate states");
 			e.printStackTrace();
 		}
 		return modelAndView;
