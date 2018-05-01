@@ -44,6 +44,7 @@
 	            <form:hidden path="donorInfo.donorInfoId" />
 	            <form:hidden path="userAddress.addressId" />
 	            <form:hidden path="donorInfo.workAddress.addressId" />
+	             <form:hidden path="bloodTests.bloodTestId" />
 	        <div class="row">
                 
 				<!-- Personal information -->
@@ -121,22 +122,22 @@
 				  
 				  				<div class="form-group row">
 								    <label for="address"
-										class="col-sm-4 col-form-label form-control-sm">Address</label>
+									class="col-sm-4 col-form-label form-control-sm">Address</label>
 								    <div class="col-sm-6">
 					    				<form:input path="userAddress.address" type="text"
-											class="form-control" id="address" placeholder="Address" />
+										class="form-control" id="address" placeholder="Address" />
 				  					</div>
 								</div>
 								
 								
 								<div class="form-group row">
 								    <label for="state"
-										class="col-sm-4 col-form-label form-control-sm">State</label>
+									class="col-sm-4 col-form-label form-control-sm">State</label>
 								    <div class="col-sm-6">
 									    <form:select path="userAddress.state.stateId"
-											class="form-control" id="state">
+										class="form-control" id="state">
 									   			<form:options items="${states}" itemLabel="code"
-												itemValue="stateId" />
+											itemValue="stateId" />
 									    </form:select>
 				  					</div>
 				  				</div>
@@ -144,20 +145,20 @@
 								
 								<div class="form-group row">
 								    <label for="city"
-										class="col-sm-4 col-form-label form-control-sm">City</label>
+									class="col-sm-4 col-form-label form-control-sm">City</label>
 								    <div class="col-sm-6">
 							    		<form:input path="userAddress.city" type="text"
-											class="form-control" id="city" placeholder="City" />
+										class="form-control" id="city" placeholder="City" />
 							  		</div>
 				           		</div>
 							
 								<div class="form-group row">
 								    <label for="zipcode"
-										class="col-sm-4 col-form-label form-control-sm">Zip Code</label>
+									class="col-sm-4 col-form-label form-control-sm">Zip Code</label>
 								    <div class="col-sm-6">
 				   						 <form:input path="userAddress.zipcode" type="text"
-											pattern="[0-9]{5}" class="form-control" id="zipcode"
-											placeholder="Zip Code" />
+										pattern="[0-9]{5}" class="form-control" id="zipcode"
+										placeholder="Zip Code" />
 				 					 </div>
 				 				</div>
 			
@@ -198,7 +199,8 @@
 									class="col-sm-4 col-form-label form-control-sm">Last Donated Date</label>
 							    <div class="col-sm-6">
 				    				<form:input path="donorInfo.lastDonatedDate" type="text"
-										class="form-control" id="ldd" placeholder="Last Donated Date" /><!-- Date picker -->
+										class="form-control" id="ldd" placeholder="Last Donated Date" />
+									<!-- Date picker -->
 			  					</div>
 							</div>
 							
@@ -286,7 +288,9 @@
 									class="col-sm-4 col-form-label form-control-sm">ID Issue Date</label>
 							    <div class="col-sm-6">
 							       <form:input path="donorInfo.idIssueDate" type="text"
-										class="form-control" id="id_issue_date" placeholder="ID issue Date" /><!-- Date picker -->
+										class="form-control" id="id_issue_date"
+										placeholder="ID issue Date" />
+									<!-- Date picker -->
 							    </div>
 			  				</div>
 			  				
@@ -295,7 +299,9 @@
 									class="col-sm-4 col-form-label form-control-sm">ID Expiry Date</label>
 							    <div class="col-sm-6">
 							       <form:input path="donorInfo.idExpiryDate" type="text"
-										class="form-control" id="id_expiry_date" placeholder="ID Expiry Date" /><!-- Date picker -->
+										class="form-control" id="id_expiry_date"
+										placeholder="ID Expiry Date" />
+									<!-- Date picker -->
 							    </div>
 			  				</div>
 				  				
@@ -324,7 +330,8 @@
 									class="col-sm-4 col-form-label form-control-sm">Work Address</label>
 							    <div class="col-sm-6">
 				    				<form:input path="donorInfo.workAddress.address" type="text"
-										class="form-control" id="work_address" placeholder="Work Address" />
+										class="form-control" id="work_address"
+										placeholder="Work Address" />
 			  					</div>
 							</div>
 							
@@ -343,9 +350,9 @@
 									class="col-sm-4 col-form-label form-control-sm">State</label>
 							    <div class="col-sm-6">
 									    <form:select path="donorInfo.workAddress.state.stateId"
-											class="form-control" id="work_address_state">
+										class="form-control" id="work_address_state">
 									   			<form:options items="${states}" itemLabel="code"
-												itemValue="stateId" />
+											itemValue="stateId" />
 									    </form:select>
 			  					</div>
 							</div>
@@ -355,18 +362,108 @@
 									class="col-sm-4 col-form-label form-control-sm">Zip Code</label>
 							    <div class="col-sm-6">
 				    				<form:input path="donorInfo.workAddress.zipcode" type="text"
-										class="form-control" id="work_address_zip_code" placeholder="Zip Code" />
+										class="form-control" id="work_address_zip_code"
+										placeholder="Zip Code" />
 			  					</div>
 							</div>
 							
 					     </div>
 				    </div>    
 				</div>
+				<!-- Tests information -->
+				<div class="col-md-5"> 
+					<div class="card donor-info-card" style="clear: both;">
+						 <div class="card-header form-card-header">
+					      Tests Information
+					     </div>
+					     <div class="card-body">
+							 
+							 <div class="form-group row">
+							     <label for="hiv"
+									class="col-sm-4 col-form-label form-control-sm">HIV</label>
+							     <div class="col-sm-6">
+								    <div class="radio">
+										  <label><form:radiobutton path="bloodTests.hiv" id="hiv"
+												value="P" />PASS</label>
+									</div>
+									<div class="radio">
+									  	  <label><form:radiobutton path="bloodTests.hiv" id="hiv"
+												value="F" />FAIL</label>
+									</div>
+								</div>
+						    </div>
+						    
+						    <div class="form-group row">
+							     <label for="hepatitis"
+									class="col-sm-4 col-form-label form-control-sm">Hepatitis B/C</label>
+							     <div class="col-sm-6">
+								    <div class="radio">
+										  <label><form:radiobutton path="bloodTests.hepatitis" id="hepatitis"
+												value="P" />PASS</label>
+									</div>
+									<div class="radio">
+									  	  <label><form:radiobutton path="bloodTests.hepatitis" id="hepatitis"
+												value="F" />FAIL</label>
+									</div>
+								</div>
+						    </div>
+						    
+						    <div class="form-group row">
+							     <label for="syphilis"
+									class="col-sm-4 col-form-label form-control-sm">Syphilis</label>
+							     <div class="col-sm-6">
+								    <div class="radio">
+										  <label><form:radiobutton path="bloodTests.syphilis" id="syphilis"
+												value="P" />PASS</label>
+									</div>
+									<div class="radio">
+									  	  <label><form:radiobutton path="bloodTests.syphilis" id="syphilis"
+												value="F" />FAIL</label>
+									</div>
+								</div>
+						    </div>
+						    
+						    <div class="form-group row">
+							     <label for="malaria"
+									class="col-sm-4 col-form-label form-control-sm">Malaria</label>
+							     <div class="col-sm-6">
+								    <div class="radio">
+										  <label><form:radiobutton path="bloodTests.malaria" id="malaria"
+												value="P" />PASS</label>
+									</div>
+									<div class="radio">
+									  	  <label><form:radiobutton path="bloodTests.malaria" id="malaria"
+												value="F" />FAIL</label>
+									</div>
+								</div>
+						    </div>
+						    
+						    <div class="form-group row">
+							     <label for="drug_test"
+									class="col-sm-4 col-form-label form-control-sm">Drug Test</label>
+							     <div class="col-sm-6">
+								    <div class="radio">
+										  <label><form:radiobutton path="bloodTests.drugTest" id="drug_test"
+												value="P" />PASS</label>
+									</div>
+									<div class="radio">
+									  	  <label><form:radiobutton path="bloodTests.drugTest" id="drug_test"
+												value="F" />FAIL</label>
+									</div>
+								</div>
+						    </div>
+							
+					     </div>
+				    </div>  
+				</div>     
 			</div>
-		    <div class="bottom_btns" style="clear: both;text-align: center;">
+		    <div class="bottom_btns" style="clear: both; text-align: center;">
 		     	<form:button type="submit" class="btn btn-primary">Update Info</form:button>
+		     	<c:if
+						test="${not empty donor.status and (donor.status.statusId eq 1 or donor.status.statusId eq 2)}">
 		     	<a href="${base_url}donors/approve/${donor.donorId}"
 					class="btn btn-primary">Approve</a>
+					</c:if>
 		     	<a href="${base_url}donors/requests" class="btn btn-primary">Close</a>
 		     </div>
 	     

@@ -48,6 +48,9 @@ public class Donor {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "donor_info_id")
 	private DonorInfo donorInfo;
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "blood_tests_id")
+	private BloodTests bloodTests;
 	@Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	@UpdateTimestamp
 	private Date createdAt;
@@ -119,6 +122,14 @@ public class Donor {
 		this.donorInfo = donorInfo;
 	}
 
+	public BloodTests getBloodTests() {
+		return bloodTests;
+	}
+
+	public void setBloodTests(BloodTests bloodTests) {
+		this.bloodTests = bloodTests;
+	}
+
 	public Date getCreatedAt() {
 		return createdAt;
 	}
@@ -139,7 +150,8 @@ public class Donor {
 	public String toString() {
 		return "Donor [donorId=" + donorId + ", bloodGroup=" + bloodGroup + ", dateOfBirth=" + dateOfBirth + ", gender="
 				+ gender + ", userAddress=" + userAddress + ", user=" + user + ", status=" + status + ", donorInfo="
-				+ donorInfo + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+				+ donorInfo + ", bloodTests=" + bloodTests + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
+				+ "]";
 	}
 
 }

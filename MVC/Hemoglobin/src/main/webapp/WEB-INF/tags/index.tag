@@ -116,7 +116,7 @@
 				<li class="nav-item"><a class="nav-link"
 					href="${base_url}requests">Your
 						Requests</a></li>
-				<li class="nav-item"><a class="nav-link" href="${base_url}assignments">Assignments</a></li>
+				<li class="nav-item"><a class="nav-link" href="${base_url}assignments">Your Assignments</a></li>
 			</c:if>
 			<c:if
 				test="${not empty sessionScope.user and sessionScope.user.userrole.roleId eq 3}">

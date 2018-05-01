@@ -113,6 +113,11 @@ public class DonarController {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
 			modelAndView.setViewName("donorInformation");
+			Donor donor = donorService.getDonarById(id);
+			if (donor.getStatus().getStatusId() == 1) {
+				donor.setStatus(new Status(2));
+				donor = donorService.updateDonor(id, donor);
+			}
 			modelAndView.addObject("donor", donorService.getDonarById(id));
 		} catch (DonorException e) {
 			modelAndView.setViewName("donorRequests");
@@ -234,7 +239,7 @@ public class DonarController {
 	}
 
 	@ResponseBody
-	@RequestMapping( produces = {
+	@RequestMapping(produces = {
 			MediaType.APPLICATION_JSON_VALUE }, method = RequestMethod.POST, path = "loadDonors/{id}")
 	public List<Donor> getDonorsForRequest(@PathVariable("id") int requestId) {
 		List<Donor> donors = null;
