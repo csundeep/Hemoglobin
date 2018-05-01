@@ -233,4 +233,17 @@ public class DonarController {
 		return donors;
 	}
 
+	@ResponseBody
+	@RequestMapping( produces = {
+			MediaType.APPLICATION_JSON_VALUE }, method = RequestMethod.POST, path = "loadDonors/{id}")
+	public List<Donor> getDonorsForRequest(@PathVariable("id") int requestId) {
+		List<Donor> donors = null;
+		try {
+			donors = donorService.getDonars();
+		} catch (DonorException e) {
+			e.printStackTrace();
+		}
+		return donors;
+	}
+
 }

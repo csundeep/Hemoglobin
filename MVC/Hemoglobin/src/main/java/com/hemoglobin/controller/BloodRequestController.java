@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hemoglobin.entities.Assignment;
 import com.hemoglobin.entities.BloodGroup;
 import com.hemoglobin.entities.BloodRequest;
 import com.hemoglobin.entities.Status;
@@ -60,6 +61,7 @@ public class BloodRequestController {
 		try {
 			modelAndView.setViewName("bloodRequests");
 			modelAndView.addObject("requests", service.findAll());
+			modelAndView.addObject("assignment",new Assignment());
 		} catch (BloodRequestException e) {
 			e.printStackTrace();
 		}

@@ -13,6 +13,62 @@ $(document).ready(function() {
     $('#bloodRequests').DataTable({searching: false});
 } );
 	
+function loadDonorsToAssign(requestId)
+{
+	console.log(requestId);
+	$.ajax({
+		type : "POST",
+		contentType : "application/json",
+		url : "${base_url}donors/loadDonors/"+requestId,
+		dataType : 'json',
+		timeout : 100000,
+		success : function(data) {
+			console.log("SUCCESS: ", data);
+			$('#donorsFor'+requestId).empty();
+			var htmlrow="<select name='donors"+requestId+"' class='form-control form-control-sm' id='donors"+requestId+"'>"
+			 $.each(data,function(key, donor) {
+				 htmlrow=htmlrow+"<option value='"+donor.donorId+"'>"+donor.user.firstName+" "+donor.user.lastName+"<option>"
+			 });
+			htmlrow=htmlrow+"</select>"
+			$('#donorsFor'+requestId).append(htmlrow);
+		},
+		error : function(e) {
+			console.log("ERROR: ", e.Message);
+		},
+		done : function(e) {
+			console.log("DONE");
+		}
+	});
+	
+}
+
+function assignDonor(requestId) {
+	 var dataObject = JSON.stringify({
+		    'donorId': $('#donors'+requestId).val(),
+		    'requestId': $('#requestId'+requestId).val()
+		});
+	 	$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "${base_url}assignments",
+			dataType : 'json',
+			timeout : 100000,
+			data: dataObject,
+			success : function(data) {
+				console.log("SUCCESS: ", data);
+				$('#requestStatus'+requestId).empty();
+				$('#assignbtn'+requestId).empty();
+				$('#requestStatus'+requestId).append("<span class='badge badge-warning'>Donar Assigned</span>")
+			},
+			error : function(e) {
+				console.log("ERROR: ", e.Message);
+			},
+			done : function(e) {
+				console.log("DONE");
+			}
+		});
+}
+
 function deleteRequest(requestId) {
 	console.log(requestId);
     	$.ajax({
@@ -29,7 +85,7 @@ function deleteRequest(requestId) {
 						           	+"<td>" + (request.requestId) + "</td>"
 						            +"<td><a href=${base_url}requests/"+request.requestId+">" + request.patientName + "</a></td>"
 						            +"<td>" + request.bloodGroup + "</td>"
-						            +"<td>";
+						            +"<td id='requestStatus'"+request.requestId+">";
 		        	
 					    if (request.status.statusId== 1)
 					    	htmlrow  = htmlrow+"<span class='badge badge-primary'>"+request.status.description+ "</span>";
@@ -53,8 +109,8 @@ function deleteRequest(requestId) {
 						if (request.status.statusId != 4)
                            htmlrow  = htmlrow+" <a href=''#' data-toggle='modal' data-target='#deleteModal"+request.requestId+"'><i class='fa fa-trash' style='color: red' title='delete the request'></i></a></td>";
                         
-                        htmlrow  = htmlrow+"<td>";
-						if(request.user.userrole.roleId == 3 )
+                        htmlrow  = htmlrow+"<td id='assignbtn'"+request.requestId+">";
+						if(request.user.userrole.roleId == 3 && request.status.statusId==1 )
 						  	htmlrow  = htmlrow+" <a href='#'><i class='fa fa-plus' style='color: plus' title='Assign Donar'></i></a></td>";										
 				      
 						  	htmlrow  = htmlrow+"</tr>"
@@ -103,7 +159,8 @@ function deleteRequest(requestId) {
 	<c:set var="req" value="${pageContext.request}" />
 	<c:set var="url">${req.requestURL}</c:set>
 	<c:set var="uri" value="${req.requestURI}" />
-	<c:url var="base_url" value="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" />
+	<c:url var="base_url"
+			value="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" />
 <div class="card form-card">
 
 	<!--Table-->
@@ -143,7 +200,7 @@ function deleteRequest(requestId) {
         <td>
             <c:out value="${request.bloodGroup}" />
         </td>
-        <td>
+        <td id="requestStatus${request.requestId}">
         	<c:if test="${request.status.statusId eq 1}">
             <span class="badge badge-primary"><c:out
 												value="${request.status.description}" /> </span>
@@ -180,14 +237,50 @@ function deleteRequest(requestId) {
 											title="delete the request"></i></a>
 		  </c:if>
         </td>
-        <td>
+        <td id="assignbtn${request.requestId}">
         <c:if
-										test="${not empty sessionScope.user and sessionScope.user.userrole.roleId eq 3 }">
-        <a href="#"><i class="fa fa-user-plus" style="color: blue"
+										test="${not empty sessionScope.user and sessionScope.user.userrole.roleId eq 3 and request.status.statusId eq 1 }">
+        <a href="#" data-toggle="modal"
+											onclick="loadDonorsToAssign(${request.requestId})"
+											data-target="#assignModal${request.requestId}"><i
+											class="fa fa-user-plus" style="color: blue"
 											title="Assign Donar"></i></a>
         </c:if>
         </td>
     </tr>
+    
+    
+  <div class="modal fade" id="assignModal${request.requestId}"
+								tabindex="-1" role="dialog"
+								aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Assign Donor</h5>
+        <button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+		<input type="hidden" id="requestId${request.requestId}" name="requestId${request.requestId}" value="${request.requestId}"/> 
+      <div class="modal-body">
+      <div class="form-group row">
+	    <label for="donors${request.requestId}" class="col-sm-4 col-form-label form-control-sm">Donors</label>
+	    <div class="col-sm-6" id="donorsFor${request.requestId}">
+	    
+	    </div>
+	  </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Close</button>
+        <button type="button" onclick="javascript:assignDonor(${request.requestId})" data-dismiss="modal" class="btn btn-danger">Assign</button>
+      </div>
+    </div>
+  </div>
+</div>   
+    
             
  <div class="modal fade" id="deleteModal${request.requestId}"
 								tabindex="-1" role="dialog"
