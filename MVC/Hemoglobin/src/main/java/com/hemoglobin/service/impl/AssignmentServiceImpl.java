@@ -7,18 +7,24 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hemoglobin.entities.Assignment;
+import com.hemoglobin.entities.BloodRequest;
+import com.hemoglobin.entities.Status;
 import com.hemoglobin.exceptions.AssignmentException;
 import com.hemoglobin.respository.AssignmentRepository;
+import com.hemoglobin.respository.BloodRequestRepository;
 import com.hemoglobin.service.AssignmentService;
 
 @Service
 public class AssignmentServiceImpl implements AssignmentService {
 
 	@Autowired
-	private AssignmentRepository repository;
+	private AssignmentRepository assignmentRepository;
+
+	@Autowired
+	private BloodRequestRepository bloodRequestRepository;
 
 	public List<Assignment> findAll() throws AssignmentException {
-		List<Assignment> assignments = repository.findAll();
+		List<Assignment> assignments = assignmentRepository.findAll();
 		if (assignments != null && assignments.size() > 0)
 			return assignments;
 		else
@@ -26,7 +32,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 	}
 
 	public Assignment findById(int id) throws AssignmentException {
-		Assignment assignment = repository.findById(id);
+		Assignment assignment = assignmentRepository.findById(id);
 		if (assignment == null) {
 			throw new AssignmentException("Assignment with id:" + id + " not found");
 		}
@@ -35,8 +41,11 @@ public class AssignmentServiceImpl implements AssignmentService {
 
 	@Transactional
 	public Assignment create(Assignment assignment) throws AssignmentException {
-		Assignment assignmentInDB = repository.create(assignment);
-		if (assignmentInDB == null) {
+		Assignment assignmentInDB = assignmentRepository.create(assignment);
+		BloodRequest bloodRequestFromDB = bloodRequestRepository.findById(assignment.getBloodRequest().getRequestId());
+		bloodRequestFromDB.setStatus(new Status(2));
+		bloodRequestFromDB = bloodRequestRepository.update(bloodRequestFromDB);
+		if (assignmentInDB == null || bloodRequestFromDB == null) {
 			throw new AssignmentException("Unable to create assignment");
 		}
 		return assignmentInDB;
@@ -44,20 +53,20 @@ public class AssignmentServiceImpl implements AssignmentService {
 
 	@Transactional
 	public Assignment update(int id, Assignment state) throws AssignmentException {
-		Assignment assignmentInDB = repository.findById(id);
+		Assignment assignmentInDB = assignmentRepository.findById(id);
 		if (assignmentInDB == null) {
 			throw new AssignmentException("Assignment with id:" + id + " not found");
 		}
-		return repository.update(state);
+		return assignmentRepository.update(state);
 	}
 
 	@Transactional
 	public void delete(int id) throws AssignmentException {
-		Assignment assignmentInDB = repository.findById(id);
+		Assignment assignmentInDB = assignmentRepository.findById(id);
 		if (assignmentInDB == null) {
 			throw new AssignmentException("Assignment with id:" + id + " not found");
 		}
-		repository.delete(assignmentInDB);
+		assignmentRepository.delete(assignmentInDB);
 	}
 
 }

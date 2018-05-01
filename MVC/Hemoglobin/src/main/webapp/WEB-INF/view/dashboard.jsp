@@ -273,11 +273,11 @@
 		  <div class="form-group row">
 		  	<div class="col-sm-4">
 		    	<label for="email" class="col-form-label form-control-sm">Last Donated</label>
-		    	<label for="name" class="col-form-label form-control-sm">--</label>
+		    	<label for="name" class="col-form-label form-control-sm">${donor.donorInfo.lastDonatedDate}</label>
 		    </div>
 		    <div class="col-sm-8">
 			    <label for="name" class="col-form-label form-control-sm">Occupation</label>
-			    <label for="name" class="col-form-label form-control-sm">--</label>
+			    <label for="name" class="col-form-label form-control-sm">${donor.donorInfo.occupation}</label>
 			</div>
 		  </div>
 			
