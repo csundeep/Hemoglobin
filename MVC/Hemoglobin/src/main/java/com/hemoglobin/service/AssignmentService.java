@@ -17,4 +17,6 @@ public interface AssignmentService {
 
 	void delete(int id) throws AssignmentException;
 
+	List<Assignment> findByDonorId(int donorId) throws AssignmentException;
+
 }

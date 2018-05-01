@@ -16,4 +16,6 @@ public interface AssignmentRepository {
 
 	void delete(Assignment existing);
 
+	List<Assignment> findByDonorId(int donorId);
+
 }

@@ -30,6 +30,15 @@ public class AssignmentServiceImpl implements AssignmentService {
 		else
 			throw new AssignmentException("No Assignments found ");
 	}
+	
+	@Override
+	public List<Assignment> findByDonorId(int donorId) throws AssignmentException {
+		List<Assignment> assignments = assignmentRepository.findByDonorId(donorId);
+		if (assignments != null && assignments.size() > 0)
+			return assignments;
+		else
+			throw new AssignmentException("No Assignments found ");
+	}
 
 	public Assignment findById(int id) throws AssignmentException {
 		Assignment assignment = assignmentRepository.findById(id);
@@ -68,5 +77,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 		}
 		assignmentRepository.delete(assignmentInDB);
 	}
+
+
 
 }

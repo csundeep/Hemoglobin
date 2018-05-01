@@ -22,6 +22,17 @@ public class AssignmentRepositoryImpl implements AssignmentRepository {
 		return query.getResultList();
 	}
 
+	@Override
+	public List<Assignment> findByDonorId(int donorId) {
+		TypedQuery<Assignment> query = entityManager.createNamedQuery("Assignment.findByDonorId", Assignment.class);
+		query.setParameter("donorIdAttr", donorId);
+		List<Assignment> assignments = query.getResultList();
+		if (assignments != null && assignments.size() > 0) {
+			return assignments;
+		}
+		return null;
+	}
+
 	public Assignment findById(int id) {
 		return entityManager.find(Assignment.class, id);
 	}

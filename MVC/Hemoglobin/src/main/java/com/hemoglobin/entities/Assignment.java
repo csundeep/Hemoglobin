@@ -13,7 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "assignments")
-@NamedQueries({ @NamedQuery(name = "Assignment.findAll", query = "SELECT a FROM Assignment a ") })
+@NamedQueries({ @NamedQuery(name = "Assignment.findAll", query = "SELECT a FROM Assignment a "),
+		@NamedQuery(name = "Assignment.findByDonorId", query = "SELECT a FROM Assignment a WHERE a.donor.donorId=:donorIdAttr") })
 public class Assignment {
 
 	@Id
