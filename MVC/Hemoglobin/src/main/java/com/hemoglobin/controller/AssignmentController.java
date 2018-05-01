@@ -1,5 +1,7 @@
 package com.hemoglobin.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -12,8 +14,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hemoglobin.entities.Assignment;
+import com.hemoglobin.entities.Donor;
+import com.hemoglobin.entities.User;
 import com.hemoglobin.exceptions.AssignmentException;
 import com.hemoglobin.service.AssignmentService;
+import com.hemoglobin.service.DonorService;
 
 @Controller
 @RequestMapping(path = "assignments")
@@ -21,6 +26,12 @@ public class AssignmentController {
 
 	@Autowired
 	private AssignmentService assignmentService;
+
+	@Autowired
+	private DonorService donorService;
+
+	@Autowired
+	private HttpSession session;
 
 	@ResponseBody
 	@RequestMapping(consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = {
@@ -39,21 +50,14 @@ public class AssignmentController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView showAllAssignments() {
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("assignments");
 		try {
-			modelAndView.setViewName("assignments");
-			modelAndView.addObject("assignments", assignmentService.findAll());
-		} catch (AssignmentException e) {
-			e.printStackTrace();
-		}
-		return modelAndView;
-	}
-
-	@RequestMapping(method = RequestMethod.GET, path = "donor/{id}")
-	public ModelAndView showAssignmentsForDonor(@PathVariable("id") int donorId) {
-		ModelAndView modelAndView = new ModelAndView();
-		try {
-			modelAndView.setViewName("assignments");
-			modelAndView.addObject("assignments", assignmentService.findByDonorId(donorId));
+			User user = (User) session.getAttribute("user");
+			if (user.getUserrole().getRoleId() == 2) {
+				Donor donor = donorService.getDonarByUserId(user.getUserId());
+				modelAndView.addObject("assignments", assignmentService.findByDonorId(donor.getDonorId()));
+			} else if (user.getUserrole().getRoleId() == 3)
+				modelAndView.addObject("assignments", assignmentService.findAll());
 		} catch (AssignmentException e) {
 			e.printStackTrace();
 		}
