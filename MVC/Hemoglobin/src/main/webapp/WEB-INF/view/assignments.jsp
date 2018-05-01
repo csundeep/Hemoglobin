@@ -22,13 +22,13 @@
 	<c:set var="uri" value="${req.requestURI}" />
 	<c:url var="base_url"
 			value="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" />
-<div class="card form-card">
+<div class="card assignments-card">
 
 	<!--Table-->
 	<div class="card-header form-card-header">
      Assignments
   </div>
-  <div class="card-body">
+  <div class="card-body" style="padding: 2px">
 <table id="assignments" class="table">
     <!--Table head-->
     <thead class="blue-grey lighten-4">
