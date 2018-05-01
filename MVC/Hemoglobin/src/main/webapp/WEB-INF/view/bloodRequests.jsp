@@ -43,9 +43,13 @@ function loadDonorsToAssign(requestId)
 }
 
 function assignDonor(requestId) {
+	 var donor=new Object();
+	 var bloodRequest=new Object();
+	 donor.donorId=$('#donors'+requestId).val();
+	 bloodRequest.requestId=$('#requestId'+requestId).val();
 	 var dataObject = JSON.stringify({
-		    'donorId': $('#donors'+requestId).val(),
-		    'requestId': $('#requestId'+requestId).val()
+		    'donor': donor,
+		    'bloodRequest': bloodRequest
 		});
 	 	$.ajax({
 			type : "POST",
