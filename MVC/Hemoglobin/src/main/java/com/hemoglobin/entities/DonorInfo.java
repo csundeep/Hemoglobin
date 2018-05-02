@@ -32,7 +32,7 @@ public class DonorInfo {
 	@Column(name = "eye_color")
 	private String eyeColor;
 	@Column(name = "last_donated_date")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "mm/dd/yyyy")
 	private Date lastDonatedDate;
 	@Column
 	private String ssn;
@@ -40,10 +40,10 @@ public class DonorInfo {
 	private String idType;
 	@Column(name = "id_number")
 	private String idNumber;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "mm/dd/yyyy")
 	@Column(name = "id_issue_date")
 	private Date idIssueDate;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "mm/dd/yyyy")
 	@Column(name = "id_expiry_date")
 	private Date idExpiryDate;
 	@Column

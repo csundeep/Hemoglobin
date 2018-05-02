@@ -54,7 +54,7 @@
 					 	htmlrow  = htmlrow+"</td>"
 					 	+"<td>" +( donor.user.phone) + "</td>"
 					 	+"<td>" + donor.user.email + "</td>"
-						+"<td>" + new Date(donor.createdAt) + "</td>";
+						+"<td>" +(new Date(donor.createdAt).getFullYear()) + '-' + (new Date(donor.createdAt).getMonth()+ 1) + '-' + new Date(donor.createdAt).getDate() + "</td>";
 						           	
 					   	htmlrow  = htmlrow+"<td>";
 						if (donor.status.statusId != 4)
@@ -139,7 +139,7 @@
 							 	htmlrow  = htmlrow+"</td>"
 							 	+"<td>" +( donor.user.phone) + "</td>"
 							 	+"<td>" + donor.user.email + "</td>"
-								+"<td>" + new Date(donor.createdAt) + "</td>";
+								+"<td>" + (new Date(donor.createdAt).getFullYear()) + '-' + (new Date(donor.createdAt).getMonth()+ 1) + '-' + new Date(donor.createdAt).getDate()  + "</td>";
 							           	
 						   	htmlrow  = htmlrow+"<td>";
 							if (donor.status.statusId != 4)
@@ -387,8 +387,6 @@
 
 
 </table>
-
-
 </div>
 </div>
 </jsp:attribute>

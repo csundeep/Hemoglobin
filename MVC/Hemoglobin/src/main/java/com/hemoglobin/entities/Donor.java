@@ -32,7 +32,7 @@ public class Donor {
 	@Column(name = "blood_group")
 	private String bloodGroup;
 	@Column(name = "date_of_birth")
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "mm/dd/yyyy")
 	private Date dateOfBirth;
 	@Column
 	private char gender;

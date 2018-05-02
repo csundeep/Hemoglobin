@@ -4,6 +4,19 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="tag" tagdir="/WEB-INF/tags"%>
 <tag:index>
+	<jsp:attribute name="scripts">
+		<script>
+			$(document).ready(
+					function() {
+						$('#dob').datepicker({
+							format : 'mm/dd/yyyy',
+							todayHighlight : true,
+							autoclose : true,
+						});
+						
+					});
+		</script>
+	</jsp:attribute>
 	<jsp:attribute name="content">
 	<div class="card form-card">
 	<!--Table-->

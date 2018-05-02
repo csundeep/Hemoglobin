@@ -5,6 +5,36 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="tag" tagdir="/WEB-INF/tags"%>
 <tag:index>
+	<jsp:attribute name="scripts">
+		<script>
+			$(document).ready(
+					function() {
+						$('#dob').datepicker({
+							format : 'mm/dd/yyyy',
+							todayHighlight : true,
+							autoclose : true,
+						});
+						
+						$('#ldd').datepicker({
+							format : 'mm/dd/yyyy',
+							todayHighlight : true,
+							autoclose : true,
+						});
+						
+						$('#id_issue_date').datepicker({
+							format : 'mm/dd/yyyy',
+							todayHighlight : true,
+							autoclose : true,
+						});
+						
+						$('#id_expiry_date').datepicker({
+							format : 'mm/dd/yyyy',
+							todayHighlight : true,
+							autoclose : true,
+						});
+					});
+		</script>
+	</jsp:attribute>
 	<jsp:attribute name="content">
 		<c:set var="req" value="${pageContext.request}" />
 		<c:set var="url">${req.requestURL}</c:set>
@@ -268,7 +298,9 @@
 							       <form:select path="donorInfo.idType"
 										class="form-control form-control-sm" id="id_type"
 										name="id_type">
-										<option value="Driverse Licence">--select--</option>
+										<option value="">--select--</option>
+										<option value="Driverse License">Driverse License</option>
+										<option value="Passport">Passport</option>
 							    	</form:select>
 							    </div>
 			  				</div>
@@ -296,11 +328,11 @@
 			  				
 			  				<div class="form-group row">
 							    <label for="id_expiry_date"
-									class="col-sm-4 col-form-label form-control-sm">ID Expiry Date</label>
+									class="col-sm-4 col-form-label form-control-sm">ID Expire Date</label>
 							    <div class="col-sm-6">
 							       <form:input path="donorInfo.idExpiryDate" type="text"
 										class="form-control" id="id_expiry_date"
-										placeholder="ID Expiry Date" />
+										placeholder="ID Expire Date" />
 									<!-- Date picker -->
 							    </div>
 			  				</div>
@@ -383,12 +415,12 @@
 									class="col-sm-4 col-form-label form-control-sm">HIV</label>
 							     <div class="col-sm-6">
 								    <div class="radio">
-										  <label><form:radiobutton path="bloodTests.hiv" id="hiv"
-												value="P" />PASS</label>
+										  <label><form:radiobutton path="bloodTests.hiv"
+												id="hiv" value="P" />PASS</label>
 									</div>
 									<div class="radio">
-									  	  <label><form:radiobutton path="bloodTests.hiv" id="hiv"
-												value="F" />FAIL</label>
+									  	  <label><form:radiobutton path="bloodTests.hiv"
+												id="hiv" value="F" />FAIL</label>
 									</div>
 								</div>
 						    </div>
@@ -398,12 +430,12 @@
 									class="col-sm-4 col-form-label form-control-sm">Hepatitis B/C</label>
 							     <div class="col-sm-6">
 								    <div class="radio">
-										  <label><form:radiobutton path="bloodTests.hepatitis" id="hepatitis"
-												value="P" />PASS</label>
+										  <label><form:radiobutton path="bloodTests.hepatitis"
+												id="hepatitis" value="P" />PASS</label>
 									</div>
 									<div class="radio">
-									  	  <label><form:radiobutton path="bloodTests.hepatitis" id="hepatitis"
-												value="F" />FAIL</label>
+									  	  <label><form:radiobutton
+												path="bloodTests.hepatitis" id="hepatitis" value="F" />FAIL</label>
 									</div>
 								</div>
 						    </div>
@@ -413,12 +445,12 @@
 									class="col-sm-4 col-form-label form-control-sm">Syphilis</label>
 							     <div class="col-sm-6">
 								    <div class="radio">
-										  <label><form:radiobutton path="bloodTests.syphilis" id="syphilis"
-												value="P" />PASS</label>
+										  <label><form:radiobutton path="bloodTests.syphilis"
+												id="syphilis" value="P" />PASS</label>
 									</div>
 									<div class="radio">
-									  	  <label><form:radiobutton path="bloodTests.syphilis" id="syphilis"
-												value="F" />FAIL</label>
+									  	  <label><form:radiobutton
+												path="bloodTests.syphilis" id="syphilis" value="F" />FAIL</label>
 									</div>
 								</div>
 						    </div>
@@ -428,12 +460,12 @@
 									class="col-sm-4 col-form-label form-control-sm">Malaria</label>
 							     <div class="col-sm-6">
 								    <div class="radio">
-										  <label><form:radiobutton path="bloodTests.malaria" id="malaria"
-												value="P" />PASS</label>
+										  <label><form:radiobutton path="bloodTests.malaria"
+												id="malaria" value="P" />PASS</label>
 									</div>
 									<div class="radio">
-									  	  <label><form:radiobutton path="bloodTests.malaria" id="malaria"
-												value="F" />FAIL</label>
+									  	  <label><form:radiobutton path="bloodTests.malaria"
+												id="malaria" value="F" />FAIL</label>
 									</div>
 								</div>
 						    </div>
@@ -443,12 +475,12 @@
 									class="col-sm-4 col-form-label form-control-sm">Drug Test</label>
 							     <div class="col-sm-6">
 								    <div class="radio">
-										  <label><form:radiobutton path="bloodTests.drugTest" id="drug_test"
-												value="P" />PASS</label>
+										  <label><form:radiobutton path="bloodTests.drugTest"
+												id="drug_test" value="P" />PASS</label>
 									</div>
 									<div class="radio">
-									  	  <label><form:radiobutton path="bloodTests.drugTest" id="drug_test"
-												value="F" />FAIL</label>
+									  	  <label><form:radiobutton
+												path="bloodTests.drugTest" id="drug_test" value="F" />FAIL</label>
 									</div>
 								</div>
 						    </div>
@@ -460,9 +492,9 @@
 		    <div class="bottom_btns" style="clear: both; text-align: center;">
 		     	<form:button type="submit" class="btn btn-primary">Update Info</form:button>
 		     	<c:if
-						test="${not empty donor.status and (donor.status.statusId eq 1 or donor.status.statusId eq 2)}">
+					test="${not empty donor.status and (donor.status.statusId eq 1 or donor.status.statusId eq 2)}">
 		     	<a href="${base_url}donors/approve/${donor.donorId}"
-					class="btn btn-primary">Approve</a>
+						class="btn btn-primary">Approve</a>
 					</c:if>
 		     	<a href="${base_url}donors/requests" class="btn btn-primary">Close</a>
 		     </div>
