@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 	private UserRepository repository;
 
 	public List<User> findAll() throws UserNotFoundException{
-		List<User> users = repository.findAll();
+		List<User> users = (List<User>) repository.findAll();
 		if (users != null && users.size() > 0)
 			return users;
 		else
@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public User findById(int id) throws UserNotFoundException {
-		User user = repository.findById(id);
+		User user = repository.findById(id).get();
 		if (user == null) {
 			throw new UserNotFoundException("User with id:" + id + " not found");
 		}
@@ -49,19 +49,19 @@ public class UserServiceImpl implements UserService {
 			throw new UserAlreadyExistsException("Email is already in use: " + user.getEmail());
 		}
 		user.setUserrole(new UserRole(1));
-		return repository.create(user);
+		return repository.save(user);
 	}
 
 	public User update(int id, User emp) throws UserNotFoundException {
-		User userInDB = repository.findById(id);
+		User userInDB = repository.findById(id).get();
 		if (userInDB == null) {
 			throw new UserNotFoundException("User with id:" + id + " not found");
 		}
-		return repository.update(emp);
+		return repository.save(emp);
 	}
 
 	public void delete(int id) throws UserNotFoundException {
-		User userInDB = repository.findById(id);
+		User userInDB = repository.findById(id).get();
 		if (userInDB == null) {
 			throw new UserNotFoundException("User with id:" + id + " not found");
 		}

@@ -24,7 +24,7 @@ public class Assignment {
 	@Id
 	@GeneratedValue
 	@Column(name = "assignment_id")
-	private int assignmentId;
+	private Integer assignmentId;
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "donor_id")
 	private Donor donor;
@@ -38,11 +38,11 @@ public class Assignment {
 	@UpdateTimestamp
 	private Date updatedAt;
 
-	public int getAssignmentId() {
+	public Integer getAssignmentId() {
 		return assignmentId;
 	}
 
-	public void setAssignmentId(int assignmentId) {
+	public void setAssignmentId(Integer assignmentId) {
 		this.assignmentId = assignmentId;
 	}
 

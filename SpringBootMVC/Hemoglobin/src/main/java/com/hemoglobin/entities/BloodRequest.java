@@ -26,7 +26,7 @@ public class BloodRequest {
 	@Id
 	@GeneratedValue
 	@Column(name = "request_id")
-	private int requestId;
+	private Integer requestId;
 	@Column(name = "patient_name")
 	private String patientName;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -56,11 +56,11 @@ public class BloodRequest {
 	@UpdateTimestamp
 	private Date updatedAt;
 
-	public int getRequestId() {
+	public Integer getRequestId() {
 		return requestId;
 	}
 
-	public void setRequestId(int requestId) {
+	public void setRequestId(Integer requestId) {
 		this.requestId = requestId;
 	}
 

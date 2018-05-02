@@ -25,11 +25,11 @@ public class DonorServiceImpl implements DonorService {
 	private UserRepository userRespository;
 
 	public Donor register(Donor donor) throws DonorException {
-		Donor donorFromDB = donorRespository.create(donor);
+		Donor donorFromDB = donorRespository.save(donor);
 		if (donorFromDB == null) {
 			throw new DonorException("Unable to create Donor");
 		}
-		User user = userRespository.update(donorFromDB.getUser());
+		User user = userRespository.save(donorFromDB.getUser());
 		if (user == null) {
 			throw new DonorException("Unable to update User status");
 		}
@@ -39,12 +39,12 @@ public class DonorServiceImpl implements DonorService {
 	public void deregister(Donor donor) throws DonorException {
 		User user = donor.getUser();
 		user.getUserrole().setRoleId(1);
-		userRespository.update(user);
+		userRespository.save(user);
 
 	}
 
 	public Donor getDonarById(int id) throws DonorException {
-		Donor donor = donorRespository.findById(id);
+		Donor donor = donorRespository.findById(id).get();
 		if (donor == null) {
 			throw new DonorException("Donor with id:" + id + " not found");
 		}
@@ -52,7 +52,7 @@ public class DonorServiceImpl implements DonorService {
 	}
 
 	public List<Donor> getDonars() throws DonorException {
-		List<Donor> donors = donorRespository.findAll();
+		List<Donor> donors = (List<Donor>) donorRespository.findAll();
 		if (donors == null || donors.size() <= 0) {
 			throw new DonorException("No Donors found");
 		}
@@ -64,11 +64,11 @@ public class DonorServiceImpl implements DonorService {
 	}
 
 	public Donor updateDonor(int id, Donor donor) throws DonorException {
-		Donor donorInDB = donorRespository.findById(id);
+		Donor donorInDB = donorRespository.findById(id).get();
 		if (donorInDB == null) {
 			throw new DonorException("Donor with id:" + id + " not found");
 		}
-		return donorRespository.update(donor);
+		return donorRespository.save(donor);
 
 	}
 
@@ -81,19 +81,19 @@ public class DonorServiceImpl implements DonorService {
 	}
 
 	public Donor delete(int id) throws DonorException {
-		Donor donorInDB = donorRespository.findById(id);
+		Donor donorInDB = donorRespository.findById(id).get();
 		if (donorInDB == null) {
 			throw new DonorException("Donor with id:" + id + " not found");
 		}
 		donorInDB.setStatus(new Status(4));
-		return donorRespository.update(donorInDB);
+		return donorRespository.save(donorInDB);
 
 	}
 
 	public List<Donor> getDonorsBySearchCriteria(DonorSearch donorSearch) throws DonorException {
 		System.out.println(donorSearch.toString());
 		List<Donor> result = new ArrayList<>();
-		List<Donor> donors = donorRespository.findAll();
+		List<Donor> donors = (List<Donor>) donorRespository.findAll();
 		if (donors == null || donors.size() <= 0) {
 			throw new DonorException("No Donors found");
 		}

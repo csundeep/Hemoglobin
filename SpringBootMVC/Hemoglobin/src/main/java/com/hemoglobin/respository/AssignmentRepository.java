@@ -8,16 +8,6 @@ import com.hemoglobin.entities.Assignment;
 
 public interface AssignmentRepository extends CrudRepository<Assignment, Integer> {
 
-	List<Assignment> findAll();
-
-	Assignment findById(int id);
-
-	Assignment create(Assignment state);
-
-	Assignment update(Assignment state);
-
-	void delete(Assignment existing);
-
-	List<Assignment> findByDonorId(int donorId);
+	List<Assignment> findByDonorId(Integer donorId);
 
 }

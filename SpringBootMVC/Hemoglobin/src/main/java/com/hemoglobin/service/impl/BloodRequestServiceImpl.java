@@ -18,7 +18,7 @@ public class BloodRequestServiceImpl implements BloodRequestService {
 	private BloodRequestRepository repository;
 
 	public List<BloodRequest> findAll() throws BloodRequestException {
-		List<BloodRequest> bloodRequests = repository.findAll();
+		List<BloodRequest> bloodRequests = (List<BloodRequest>) repository.findAll();
 		if (bloodRequests != null && bloodRequests.size() > 0)
 			return bloodRequests;
 		else
@@ -26,7 +26,7 @@ public class BloodRequestServiceImpl implements BloodRequestService {
 	}
 
 	public BloodRequest findById(int id) throws BloodRequestException {
-		BloodRequest request = repository.findById(id);
+		BloodRequest request = repository.findById(id).get();
 		if (request == null) {
 			throw new BloodRequestException("Blood Request with id:" + id + " not found");
 		}
@@ -34,7 +34,7 @@ public class BloodRequestServiceImpl implements BloodRequestService {
 	}
 
 	public BloodRequest create(BloodRequest request) throws BloodRequestException {
-		BloodRequest requestFromDB = repository.create(request);
+		BloodRequest requestFromDB = repository.save(request);
 		if (requestFromDB == null) {
 			throw new BloodRequestException("Blood Request cannot br created");
 		}
@@ -42,20 +42,20 @@ public class BloodRequestServiceImpl implements BloodRequestService {
 	}
 
 	public BloodRequest update(int id, BloodRequest request) throws BloodRequestException {
-		BloodRequest requestInDB = repository.findById(id);
+		BloodRequest requestInDB = repository.findById(id).get();
 		if (requestInDB == null) {
 			throw new BloodRequestException("Blood Request with id:" + id + " not found");
 		}
-		return repository.update(request);
+		return repository.save(request);
 	}
 
 	public BloodRequest delete(int id) throws BloodRequestException {
-		BloodRequest requestInDB = repository.findById(id);
+		BloodRequest requestInDB = repository.findById(id).get();
 		if (requestInDB == null) {
 			throw new BloodRequestException("Blood Request with id:" + id + " not found");
 		}
 		requestInDB.setStatus(new Status(4));
-		return repository.update(requestInDB);
+		return repository.save(requestInDB);
 	}
 
 	@Override

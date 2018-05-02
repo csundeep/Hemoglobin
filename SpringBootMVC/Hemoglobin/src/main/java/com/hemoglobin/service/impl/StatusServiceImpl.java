@@ -17,7 +17,7 @@ public class StatusServiceImpl implements StatusService {
 	private StatusRepository repository;
 
 	public List<Status> findAll() throws StatusException {
-		List<Status> statusces = repository.findAll();
+		List<Status> statusces = (List<Status>) repository.findAll();
 		if (statusces != null && statusces.size() > 0)
 			return statusces;
 		else
@@ -25,7 +25,7 @@ public class StatusServiceImpl implements StatusService {
 	}
 
 	public Status findById(int id) throws StatusException {
-		Status status = repository.findById(id);
+		Status status = repository.findById(id).get();
 		if (status == null) {
 			throw new StatusException("Status with id:" + id + " not found");
 		}
@@ -37,19 +37,19 @@ public class StatusServiceImpl implements StatusService {
 		if (statusInDB != null) {
 			throw new StatusException("Status with code " + status.getDescription() + " is already in use");
 		}
-		return repository.create(status);
+		return repository.save(status);
 	}
 
 	public Status update(int id, Status status) throws StatusException {
-		Status statusInDB = repository.findById(id);
+		Status statusInDB = repository.findById(id).get();
 		if (statusInDB == null) {
 			throw new StatusException("Status with id:" + id + " not found");
 		}
-		return repository.update(status);
+		return repository.save(status);
 	}
 
 	public void delete(int id) throws StatusException {
-		Status statusInDB = repository.findById(id);
+		Status statusInDB = repository.findById(id).get();
 		if (statusInDB == null) {
 			throw new StatusException("Status with id:" + id + " not found");
 		}

@@ -17,7 +17,7 @@ public class StateServiceImpl implements StateService {
 	private StateRepository repository;
 
 	public List<State> findAll() throws StateException {
-		List<State> states = repository.findAll();
+		List<State> states = (List<State>) repository.findAll();
 		if (states != null && states.size() > 0)
 			return states;
 		else
@@ -25,7 +25,7 @@ public class StateServiceImpl implements StateService {
 	}
 
 	public State findById(int id) throws StateException {
-		State state = repository.findById(id);
+		State state = repository.findById(id).get();
 		if (state == null) {
 			throw new StateException("State with id:" + id + " not found");
 		}
@@ -37,19 +37,19 @@ public class StateServiceImpl implements StateService {
 		if (stateInDB != null) {
 			throw new StateException("State with code " + state.getCode() + " is already in use");
 		}
-		return repository.create(state);
+		return repository.save(state);
 	}
 
 	public State update(int id, State state) throws StateException {
-		State stateInDB = repository.findById(id);
+		State stateInDB = repository.findById(id).get();
 		if (stateInDB == null) {
 			throw new StateException("State with id:" + id + " not found");
 		}
-		return repository.update(state);
+		return repository.save(state);
 	}
 
 	public void delete(int id) throws StateException {
-		State stateInDB = repository.findById(id);
+		State stateInDB = repository.findById(id).get();
 		if (stateInDB == null) {
 			throw new StateException("State with id:" + id + " not found");
 		}
