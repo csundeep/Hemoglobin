@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.hemoglobin.entities.Assignment;
 import com.hemoglobin.entities.BloodRequest;
@@ -48,7 +47,6 @@ public class AssignmentServiceImpl implements AssignmentService {
 		return assignment;
 	}
 
-	@Transactional
 	public Assignment create(Assignment assignment) throws AssignmentException {
 		Assignment assignmentInDB = assignmentRepository.create(assignment);
 		BloodRequest bloodRequestFromDB = bloodRequestRepository.findById(assignment.getBloodRequest().getRequestId());
@@ -60,7 +58,6 @@ public class AssignmentServiceImpl implements AssignmentService {
 		return assignmentInDB;
 	}
 
-	@Transactional
 	public Assignment update(int id, Assignment state) throws AssignmentException {
 		Assignment assignmentInDB = assignmentRepository.findById(id);
 		if (assignmentInDB == null) {
@@ -69,7 +66,6 @@ public class AssignmentServiceImpl implements AssignmentService {
 		return assignmentRepository.update(state);
 	}
 
-	@Transactional
 	public void delete(int id) throws AssignmentException {
 		Assignment assignmentInDB = assignmentRepository.findById(id);
 		if (assignmentInDB == null) {

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.hemoglobin.entities.BloodRequest;
 import com.hemoglobin.entities.Status;
@@ -34,7 +33,6 @@ public class BloodRequestServiceImpl implements BloodRequestService {
 		return request;
 	}
 
-	@Transactional
 	public BloodRequest create(BloodRequest request) throws BloodRequestException {
 		BloodRequest requestFromDB = repository.create(request);
 		if (requestFromDB == null) {
@@ -43,7 +41,6 @@ public class BloodRequestServiceImpl implements BloodRequestService {
 		return requestFromDB;
 	}
 
-	@Transactional
 	public BloodRequest update(int id, BloodRequest request) throws BloodRequestException {
 		BloodRequest requestInDB = repository.findById(id);
 		if (requestInDB == null) {
@@ -52,7 +49,6 @@ public class BloodRequestServiceImpl implements BloodRequestService {
 		return repository.update(request);
 	}
 
-	@Transactional
 	public BloodRequest delete(int id) throws BloodRequestException {
 		BloodRequest requestInDB = repository.findById(id);
 		if (requestInDB == null) {

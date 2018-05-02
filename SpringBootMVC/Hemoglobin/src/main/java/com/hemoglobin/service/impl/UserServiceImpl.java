@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.hemoglobin.entities.User;
 import com.hemoglobin.entities.UserRole;
@@ -44,7 +43,6 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-	@Transactional
 	public User create(User user) throws UserAlreadyExistsException {
 		User userInDB = repository.findByEmail(user.getEmail());
 		if (userInDB != null) {
@@ -54,7 +52,6 @@ public class UserServiceImpl implements UserService {
 		return repository.create(user);
 	}
 
-	@Transactional
 	public User update(int id, User emp) throws UserNotFoundException {
 		User userInDB = repository.findById(id);
 		if (userInDB == null) {
@@ -63,7 +60,6 @@ public class UserServiceImpl implements UserService {
 		return repository.update(emp);
 	}
 
-	@Transactional
 	public void delete(int id) throws UserNotFoundException {
 		User userInDB = repository.findById(id);
 		if (userInDB == null) {

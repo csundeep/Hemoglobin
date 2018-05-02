@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.hemoglobin.entities.Donor;
 import com.hemoglobin.entities.DonorSearch;
@@ -25,7 +24,6 @@ public class DonorServiceImpl implements DonorService {
 	@Autowired
 	private UserRepository userRespository;
 
-	@Transactional
 	public Donor register(Donor donor) throws DonorException {
 		Donor donorFromDB = donorRespository.create(donor);
 		if (donorFromDB == null) {
@@ -38,7 +36,6 @@ public class DonorServiceImpl implements DonorService {
 		return donorFromDB;
 	}
 
-	@Transactional
 	public void deregister(Donor donor) throws DonorException {
 		User user = donor.getUser();
 		user.getUserrole().setRoleId(1);
@@ -66,7 +63,6 @@ public class DonorServiceImpl implements DonorService {
 		return donorRespository.findByUserId(userId);
 	}
 
-	@Transactional
 	public Donor updateDonor(int id, Donor donor) throws DonorException {
 		Donor donorInDB = donorRespository.findById(id);
 		if (donorInDB == null) {
@@ -84,7 +80,6 @@ public class DonorServiceImpl implements DonorService {
 		return donors;
 	}
 
-	@Transactional
 	public Donor delete(int id) throws DonorException {
 		Donor donorInDB = donorRespository.findById(id);
 		if (donorInDB == null) {

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.hemoglobin.entities.State;
 import com.hemoglobin.exceptions.StateException;
@@ -33,7 +32,6 @@ public class StateServiceImpl implements StateService {
 		return state;
 	}
 
-	@Transactional
 	public State create(State state) throws StateException {
 		State stateInDB = repository.findByCode(state.getCode());
 		if (stateInDB != null) {
@@ -42,7 +40,6 @@ public class StateServiceImpl implements StateService {
 		return repository.create(state);
 	}
 
-	@Transactional
 	public State update(int id, State state) throws StateException {
 		State stateInDB = repository.findById(id);
 		if (stateInDB == null) {
@@ -51,7 +48,6 @@ public class StateServiceImpl implements StateService {
 		return repository.update(state);
 	}
 
-	@Transactional
 	public void delete(int id) throws StateException {
 		State stateInDB = repository.findById(id);
 		if (stateInDB == null) {

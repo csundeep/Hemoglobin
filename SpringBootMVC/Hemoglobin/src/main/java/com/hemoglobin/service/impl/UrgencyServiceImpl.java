@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.hemoglobin.entities.UrgencyLevel;
 import com.hemoglobin.exceptions.UrgencyLevelException;
@@ -33,7 +32,6 @@ public class UrgencyServiceImpl implements UrgencyLevelService {
 		return urgencyLevel;
 	}
 
-	@Transactional
 	public UrgencyLevel create(UrgencyLevel urgencyLevel) throws UrgencyLevelException {
 		UrgencyLevel urgencyLevelInDB = repository.findByUrgency(urgencyLevel.getUrgency());
 		if (urgencyLevelInDB != null) {
@@ -43,7 +41,6 @@ public class UrgencyServiceImpl implements UrgencyLevelService {
 		return repository.create(urgencyLevel);
 	}
 
-	@Transactional
 	public UrgencyLevel update(int id, UrgencyLevel urgencyLevel) throws UrgencyLevelException {
 		UrgencyLevel urgencyLevelInDB = repository.findById(id);
 		if (urgencyLevelInDB == null) {
@@ -52,7 +49,6 @@ public class UrgencyServiceImpl implements UrgencyLevelService {
 		return repository.update(urgencyLevel);
 	}
 
-	@Transactional
 	public void delete(int id) throws UrgencyLevelException {
 		UrgencyLevel urgencyLevelInDB = repository.findById(id);
 		if (urgencyLevelInDB == null) {

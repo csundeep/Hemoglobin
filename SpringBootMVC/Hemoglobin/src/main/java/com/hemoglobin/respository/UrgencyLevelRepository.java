@@ -2,9 +2,11 @@ package com.hemoglobin.respository;
 
 import java.util.List;
 
+import org.springframework.data.repository.CrudRepository;
+
 import com.hemoglobin.entities.UrgencyLevel;
 
-public interface UrgencyLevelRepository {
+public interface UrgencyLevelRepository extends CrudRepository<UrgencyLevel, Integer> {
 
 	List<UrgencyLevel> findAll();
 
