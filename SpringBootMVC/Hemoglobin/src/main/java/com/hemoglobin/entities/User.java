@@ -9,15 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "user")
-@NamedQueries({ @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u "),
-		@NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email=:emailAttr") })
 public class User {
 
 	@Id
@@ -28,7 +25,7 @@ public class User {
 	private String firstName;
 	@Column(name = "last_name")
 	private String lastName;
-	@Column
+	@Column(unique = true)
 	private String email;
 	@Column
 	private String password;

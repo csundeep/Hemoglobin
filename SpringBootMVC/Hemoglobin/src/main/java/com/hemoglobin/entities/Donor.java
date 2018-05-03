@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -20,9 +18,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "donor")
-@NamedQueries({ @NamedQuery(name = "Donor.findAll", query = "SELECT u FROM Donor u "),
-		@NamedQuery(name = "Donor.findByUserId", query = "SELECT d FROM Donor d WHERE d.user.userId=:userIdAttr"),
-		@NamedQuery(name = "Donor.findByStatusId", query = "SELECT d FROM Donor d WHERE d.status.statusId=:statusIdAttr") })
 public class Donor {
 
 	@Id

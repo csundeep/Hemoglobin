@@ -8,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -17,8 +15,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "assignments")
-@NamedQueries({ @NamedQuery(name = "Assignment.findAll", query = "SELECT a FROM Assignment a "),
-		@NamedQuery(name = "Assignment.findByDonorId", query = "SELECT a FROM Assignment a WHERE a.donor.donorId=:donorIdAttr") })
 public class Assignment {
 
 	@Id

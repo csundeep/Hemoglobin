@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,8 +17,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "blood_requests")
-@NamedQueries({ @NamedQuery(name = "BloodRequest.findAll", query = "SELECT br FROM BloodRequest br "),
-		@NamedQuery(name = "BloodRequest.findByUserId", query = "SELECT br FROM BloodRequest br WHERE br.user.userId=:userIdAttr") })
 public class BloodRequest {
 
 	@Id

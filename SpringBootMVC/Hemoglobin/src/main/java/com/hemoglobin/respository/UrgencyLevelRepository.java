@@ -6,10 +6,6 @@ import com.hemoglobin.entities.UrgencyLevel;
 
 public interface UrgencyLevelRepository extends CrudRepository<UrgencyLevel, Integer> {
 
-
-
 	UrgencyLevel findByUrgency(String urgency);
-
-
 
 }

@@ -6,11 +6,6 @@ import com.hemoglobin.entities.Status;
 
 public interface StatusRepository extends CrudRepository<Status, Integer> {
 
-
-
-	Status findByDescription(String code);
-
-
-
+	Status findByDescription(String description);
 
 }
