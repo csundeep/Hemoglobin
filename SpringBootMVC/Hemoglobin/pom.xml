@@ -17,16 +17,10 @@
 
 	<build>
 		<plugins>
-
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<executable>true</executable>
-					<mainClass>com.hemoglobin.Application</mainClass>
-					<outputDirectory>${project.basedir}</outputDirectory>
-					<finalName>Hemoglobin</finalName>
-				</configuration>
+				<version>1.4.2.RELEASE</version>
 				<executions>
 					<execution>
 						<goals>
@@ -51,10 +45,8 @@
 			<optional>true</optional>
 		</dependency>
 
-<!-- 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-thymeleaf</artifactId> 
+			</dependency> -->
 
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
