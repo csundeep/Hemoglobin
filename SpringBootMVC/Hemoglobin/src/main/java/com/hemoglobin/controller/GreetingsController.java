@@ -11,7 +11,7 @@ public class GreetingsController {
 
 	@RequestMapping(value = "/greeting", method = RequestMethod.GET)
 	public ModelAndView greeting(@RequestParam(name = "name", required = false, defaultValue = "World") String name) {
-		ModelAndView modelAndView=new ModelAndView();
+		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("name", name);
 		modelAndView.setViewName("greeting");
 		return modelAndView;
