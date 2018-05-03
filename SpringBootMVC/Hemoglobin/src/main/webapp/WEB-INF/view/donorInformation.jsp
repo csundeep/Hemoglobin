@@ -65,7 +65,7 @@
 			</div>
 		</c:if>
 
- 		 <form:form commandName="donor" id="request_form"
+ 		 <form:form modelAttribute="donor" id="request_form"
 			action="${base_url}donors/${donor.donorId}" method="post" role="form"
 			style="display: block;">
 				<form:hidden path="donorId" />

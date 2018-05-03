@@ -55,7 +55,7 @@
 							</div>
 							</c:if>
 							<c:url var="login_url" value="login"></c:url>
-									<form:form commandName="user" id="login-form"
+									<form:form modelAttribute="user" id="login-form"
 										action="${login_url}" method="post" role="form"
 										style="display: block;">
 									<div class="form-group">
@@ -89,7 +89,7 @@
 									</div>
 									</c:if>
 								<c:url var="register_url" value="register"></c:url>
-								<form:form commandName="user" id="register-form"
+								<form:form modelAttribute="user" id="register-form"
 										action="${register_url}" method="post" role="form"
 										style="display: none;">
 									<div class="form-group">

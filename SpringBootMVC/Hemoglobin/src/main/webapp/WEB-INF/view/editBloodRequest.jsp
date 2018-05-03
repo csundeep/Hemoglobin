@@ -11,7 +11,7 @@
   </div>
   <div class="card-body">
 	<c:url var="request_url" value="/requests/edit/${request.requestId}"></c:url>
-	<form:form commandName="request" id="request_form"
+	<form:form modelAttribute="request" id="request_form"
 					action="${request_url}" method="put" role="form"
 					style="display: block;">
 					

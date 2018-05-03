@@ -72,7 +72,7 @@
     </div>
 	
 	<c:url var="donor_url" value="donors"></c:url>
-	<form:form commandName="donor" id="donor_form" action="${donor_url}"
+	<form:form modelAttribute="donor" id="donor_form" action="${donor_url}"
 					method="post" role="form" style="display: block; clear:both ">
 				<form:hidden path="donorId" />
 				<form:hidden path="user.userId" />
@@ -80,21 +80,21 @@
 	            <form:hidden path="donorInfo.donorInfoId" />
 	            <form:hidden path="userAddress.addressId" />
 	            <form:hidden path="donorInfo.workAddress.addressId" />
-  <div class="form-group">
-    <label for="blood_group">Blood Group</label>
-    <form:select path="bloodGroup" class="form-control" id="blood_group">
-			<c:forEach var="bloodGroup" items="${bloodGroups}">
-			 <c:choose>
-				<c:when test="${bloodGroup eq donor.bloodGroup}">
-					<option selected value="${bloodGroup}">${bloodGroup}</option>
-				</c:when>
-				<c:otherwise>
-					<option value="${bloodGroup}">${bloodGroup}</option>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-    </form:select>
-  </div>
+	  <div class="form-group">
+	    <label for="blood_group">Blood Group</label>
+	    <form:select path="bloodGroup" class="form-control" id="blood_group">
+				<c:forEach var="bloodGroup" items="${bloodGroups}">
+				 <c:choose>
+					<c:when test="${bloodGroup eq donor.bloodGroup}">
+						<option selected value="${bloodGroup}">${bloodGroup}</option>
+					</c:when>
+					<c:otherwise>
+						<option value="${bloodGroup}">${bloodGroup}</option>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+	    </form:select>
+	  </div>
   
     <div class="form-group">
     <label for="dob">Date Of Birth</label>
