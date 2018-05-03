@@ -1,5 +1,6 @@
 package com.hemoglobin.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,12 +12,16 @@ import javax.persistence.Table;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="user_role")
-public class UserRole {
+@Table(name = "user_role")
+public class UserRole implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue
-	@Column(name="role_id")
+	@Column(name = "role_id")
 	private int roleId;
 	@Column
 	private String name;
