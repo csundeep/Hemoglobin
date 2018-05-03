@@ -49,7 +49,7 @@
 		  </button>
 		</div>
 		</c:if>
-		<form:form commandName="request" id="request_form"
+		<form:form modelAttribute="request" id="request_form"
 						action="${request_url}" method="post" role="form"
 						style="display: block;">
 	  
