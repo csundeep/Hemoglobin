@@ -3,6 +3,9 @@ phases:
   build:
     commands:
       - mvn clean install
+cache:
+  paths:
+    - '/root/.m2/**/*'
 artifacts:
   files:
     - MVC/Hemoglobin/appspec.yml
